@@ -31,6 +31,9 @@ click = "^8.1.6"
 iydon = {extras = ["full"], version = "^2023.4"}
 loguru = "^0.7.0"
 
+[tool.poetry.scripts]
+ipetsc = 'ipetsc.__main__:main'
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
