@@ -27,6 +27,9 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
+click = "^8.1.6"
+iydon = {extras = ["full"], version = "^2023.4"}
+loguru = "^0.7.0"
 
 [build-system]
 requires = ["poetry-core"]
