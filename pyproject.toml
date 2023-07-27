@@ -5,7 +5,7 @@ description = "An Experimental Installation Management Solution for PETSc."
 authors = ["Iydon Liang <liangiydon@gmail.com>"]
 keywords = ["PETSc"]
 readme = "README.md"
-license = "BSD-2-Clause"
+license = "BSD-2-Clause"  # SPDX short identifier
 homepage = "https://github.com/iydon/iPETSc"
 repository = "https://github.com/iydon/iPETSc"
 include = []
@@ -30,6 +30,7 @@ python = ">=3.7,<4.0"
 click = "^8.1.6"
 iydon = {extras = ["full"], version = "^2023.4"}
 loguru = "^0.7.0"
+tomlkit = "^0.12.1"
 
 [tool.poetry.scripts]
 ipetsc = 'ipetsc.__main__:main'
