@@ -1,0 +1,5 @@
+# global
+__pycache__/
+
+# local
+/dist/
