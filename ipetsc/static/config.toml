@@ -1,0 +1,44 @@
+[command]
+# global
+cmake = "cmake"
+git = "git"
+make = "make"
+poetry = "poetry"
+# local
+configure = "./configure"
+
+[environ]
+# test
+IPETSC_TEST_1 = "$IPETSC_HOME:$IPETSC_PACKAGE:$IPETSC_VERSION"
+IPETSC_TEST_2 = "${IPETSC_TEST_1}"
+IPETSC_TEST_3 = "$IPETSC_UNKNOWN_VARIABLE"
+
+[arch]
+# arch = [bases, options, public]  # order matters
+scratch = [[], ["--prefix=$PETSC_PREFIX"], true]
+general-complex = [[], ["--with-scalar-type=complex", "--download-sundials2=0"], false]
+general-optimize = [
+    [], [
+        "--with-debugging=0",
+        "--COPTFLAGS=\"-g -O3 -march=native\"", "--CXXOPTFLAGS=\"-g -O3 -march=native\"",
+    ], false,
+]
+basic-real-debug = [
+    ["scratch"], [
+        "--download-cmake=1", "--download-f2cblaslapack=1", "--download-mpich=1",
+        "--with-precision=double", "--with-debugging=1", "--with-scalar-type=real",
+    ], true,
+]
+basic-real-optimize = [["basic-real-debug", "general-optimize"], [], true]
+basic-complex-debug = [["basic-real-debug", "general-complex"], [], true]
+basic-complex-optimize = [["basic-real-optimize", "general-complex"], [], true]
+advance-real-debug = [
+    ["basic-real-debug"], [
+        "--download-fftw=1", "--download-hdf5=1", "--download-htool=1", "--download-hypre=1", "--download-metis=1",
+        "--download-parmetis=1", "--download-slepc=1", "--download-sundials2=1", "--download-superlu_dist=1",
+    ], true,
+]
+advance-real-optimize = [["advance-real-debug", "general-optimize"], [], true]
+advance-complex-debug = [["advance-real-debug", "general-complex"], [], true]
+advance-complex-optimize = [["advance-real-optimize", "general-complex"], [], true]
+default = [["basic-real-debug"], [], true]
